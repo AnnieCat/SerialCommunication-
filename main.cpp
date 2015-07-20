@@ -6,46 +6,32 @@
  This program simultaneously reads from and writes to the serial port.
  --------------------------------------------------------------------------------------------
  **/
-#include <stdio.h>
-#include <tchar.h>
 #include "sserial.h"
-#include <string>
-#include <iostream>
-#include <windows.h>
-#include "multithread.h"
-#include "sserialException.h"
+#include <cstdint>	// For uint8_t
+#include <iostream> // For cin, cout, endl
+
 using namespace std;
-void print(string& data,void* unused)
-{
-	cout<<data;
-}
+
+
 
 int main()
 {
-	
-	//first, open the serial port
-	//Adjust COM4 to whatever port your device is on
-	serial port3("COM3", CBR_115200);
-
-	//write some data from the console to the serial port
-	//string input;
-	//cin >> input;
-	//port3.write(input);
-
-	//Read some data and print it
-	//program will pause until a whitespace character is read (just like cin)
-	//cout<<port3.read();
-
-	//Now, start reading data asynchronously (in a different thread).
-	//This data will be printed with the print() function.
-	//port3.callback(print);
-	
-	//now, start writing data from the console to the port forever
+	serial Serial("COM3", CBR_115200);
 	while(true)
 	{
-		string input;
-		cin >> input;
-		port3.write(input);	
+		int r, g, b;
+		cin >> r >> g >> b;
+		cout << "your values are " << r << " " << g << " " << b << endl;
+
+		Serial.write(r);
+		Serial.write(g);
+		Serial.write(b);
+
+		int avail = Serial.available();
+		cout << "(There are " << avail << " bytes ready right now)" << endl;
+		uint8_t response = Serial.read();
+		cout << "We received a response of " << (int)response << endl;
 	}
 }
+
 

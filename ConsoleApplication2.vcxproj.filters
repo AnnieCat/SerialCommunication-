@@ -6,8 +6,6 @@
     <ClCompile Include="sserial.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="multithread.h" />
     <ClInclude Include="sserial.h" />
-    <ClInclude Include="sserialException.h" />
   </ItemGroup>
 </Project>
