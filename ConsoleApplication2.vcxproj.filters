@@ -7,5 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sserial.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
 </Project>
